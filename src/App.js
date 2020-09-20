@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header';
+import Bebidas from './components/Bebidas';
+import CategoriasProvider from './context/CategoriasContext';
+import IngredientesProvider from './context/IngredientesContext';
+import BebidasProvider from './context/BebidasContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BebidasProvider>
+      <IngredientesProvider>
+        <CategoriasProvider>
+            <Header title="Buscador de Bebidas"></Header>
+            <main>
+              <Bebidas></Bebidas>
+            </main>
+        </CategoriasProvider>
+      </IngredientesProvider>
+    </BebidasProvider>
+    );
 }
 
 export default App;
