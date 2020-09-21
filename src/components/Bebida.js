@@ -1,26 +1,13 @@
-import React, {Fragment, useEffect, useState} from 'react';
-import axios from 'axios';
+import React, {Fragment, useContext} from 'react';
+import {ModalContext} from '../context/ModalContext';
+import Spinner from '../components/Spinner';
 const Bebida = ({bebida}) => {
+
+     const {changeId, receta, cantidad, spinner} = useContext(ModalContext);
+
      const {strDrink, strDrinkThumb, idDrink} = bebida;
 
-     const [receta, changeReceta] = useState({});
-     const [cantidad, changeCantidad] = useState([]);
-     
 
-
-     useEffect(() => {
-          (async()=>{
-               const {data} = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`)
-               changeReceta({...data.drinks[0]})
-               let newcantidad = [];
-               for (let i = 1; i <= 15; i++) {
-                   if (receta[`strIngredient${i}`]){
-                    newcantidad.push(i);
-                   }
-               }
-               changeCantidad([...newcantidad]);
-          })();
-     }, [idDrink, receta]);
      return (
           <Fragment>
                <div className="col-lg-3 col-md-4 col-sm-6 my-3">
@@ -30,7 +17,7 @@ const Bebida = ({bebida}) => {
                               <h4 className="lead text-white">{strDrink}</h4>
                          </div>
                          <div className="card-header">
-                              <button className="btn btn-secondary btn-block" data-toggle="modal" data-target={`#recetaModal${idDrink}`}>Ver Receta</button>
+                              <button className="btn btn-secondary btn-block" data-toggle="modal" data-target={`#recetaModal${idDrink}`} onClick={() => changeId(idDrink)}>Ver Receta</button>
                          </div>
                     </div>
                </div>
@@ -44,6 +31,9 @@ const Bebida = ({bebida}) => {
                                         <span>&times;</span>
                                    </button>
                               </div>
+                              {!spinner
+                              ?
+                              <Fragment>
                               <div className="modal-body">
                                    <div className="text-center">
                                         <img src={strDrinkThumb} alt={strDrink} className="img-fluid rounded-circle" style={{height: '50vh'}}/>
@@ -68,6 +58,11 @@ const Bebida = ({bebida}) => {
                                         Cerrar
                                    </button>
                               </div>
+                              </Fragment>
+                              :
+                              <Spinner></Spinner>
+                              }
+
                          </div>
                     </div>
                </div>
