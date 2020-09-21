@@ -3,6 +3,7 @@ import Formulario from '../components/Formulario';
 import Lista from '../components/Lista';
 import {BebidasContext} from '../context/BebidasContext';
 import Spinner from '../components/Spinner';
+
 const Bebidas = () => {
      const {spinner} = useContext(BebidasContext);
      return (

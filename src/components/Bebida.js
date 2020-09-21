@@ -1,6 +1,7 @@
 import React, {Fragment, useContext} from 'react';
 import {ModalContext} from '../context/ModalContext';
 import Spinner from '../components/Spinner';
+import PropTypes from 'prop-types';
 const Bebida = ({bebida}) => {
 
      const {changeId, receta, cantidad, spinner} = useContext(ModalContext);
@@ -67,9 +68,10 @@ const Bebida = ({bebida}) => {
                     </div>
                </div>
           </Fragment>
-
-     
      );
+}
+Bebida.propTypes = {
+     bebida: PropTypes.object.isRequired
 }
  
 export default Bebida;

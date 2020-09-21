@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {CategoriasContext} from '../context/CategoriasContext';
 import {IngredientesContext} from '../context/IngredientesContext';
 import {BebidasContext} from '../context/BebidasContext';
+import PropTypes from 'prop-types';
 
 
 const Formulario = ({title}) => {
@@ -65,5 +66,7 @@ const Formulario = ({title}) => {
           </div>
      );
 }
- 
+Formulario.propTypes = {
+     title: PropTypes.string.isRequired
+}
 export default Formulario;
